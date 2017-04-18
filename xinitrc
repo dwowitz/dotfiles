@@ -1,0 +1,81 @@
+#!/bin/sh
+
+userresources=$HOME/.Xresources
+usermodmap=$HOME/.Xmodmap
+sysresources=/etc/X11/xinit/.Xresources
+sysmodmap=/etc/X11/xinit/.Xmodmap
+
+# merge in defaults and keymaps
+
+if [ -f $sysresources ]; then
+
+    xrdb -merge $sysresources
+
+fi
+
+if [ -f $sysmodmap ]; then
+    xmodmap $sysmodmap
+fi
+
+if [ -f "$userresources" ]; then
+
+    xrdb -merge "$userresources"
+
+fi
+
+if [ -f "$usermodmap" ]; then
+    xmodmap "$usermodmap"
+fi
+
+# start some nice programs
+
+if [ -d /etc/X11/xinit/xinitrc.d ] ; then
+ for f in /etc/X11/xinit/xinitrc.d/?*.sh ; do
+  [ -x "$f" ] && . "$f"
+ done
+ unset f
+fi
+
+# Start Compton to enable window transparency
+compton -b --config ~/.config/compton/compton.conf
+
+#Display script output in status bar
+while true; do
+    xsetroot -name "`barstats-1`;`barstats-2`"
+    sleep 7
+done &
+
+# Hide inactive/diabled cursor
+while true; do
+    hhpc
+done &
+
+#Set desktop wallpaper
+feh --bg-fill ~/.wallpaper/distorflower_04132017.png &
+
+#Adjust for HiDPI
+xrandr --dpi 168 &
+
+#Autostart applications
+while true; do
+    dunst
+done &
+
+#Get current weather for status bar
+myForecast > /tmp/myForecast.json &
+
+#Start redshift
+redshift -c ~/.config/redshift/redshift.conf &
+
+#Start terminal emulator within tabbed
+tabbed -f -r 2 -n homest st -w '' &
+
+#Start Surf in tabbed window
+#tabbed -n homesurf -f surf -e &
+
+#Finally, start dwm
+# https://wiki.archlinux.org/index.php/dwm#Restart_dwm_without_logging_out_or_closing_programs
+while true; do
+    # Log stderror & stdout to a file 
+    dwm >> ~/.log/dwm.log 2>&1
+done

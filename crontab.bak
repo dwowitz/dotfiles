@@ -1,0 +1,2 @@
+0 * * * * . ~/.bash_profile; ~/.local/scripts/bin/myForecast
+0 * * * * /usr/bin/crontab -l > ~/dotfiles/crontab.bak

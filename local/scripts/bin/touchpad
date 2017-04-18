@@ -1,0 +1,61 @@
+#!/usr/bin/env bash
+#
+# touchpad
+# Copyright (C) 2017 Danny Berkowitz <dwowitz@gmail.com>
+#
+# Distributed under terms of the MIT license.
+#
+
+device_name="Microsoft Surface Type Cover"
+device_type="pointer"
+device_string="${device_type}:${device_name}"
+
+tp_status()
+{
+    device_enabled=$(xinput list-props "${device_string}" | awk -F: '/Device Enabled/ {gsub(/[\t]/, "", $2); print $2 }')
+
+    if [ $device_enabled == 1 ]; then
+        status="enabled"
+    elif [ $device_enabled == 0 ]; then
+        status="disabled"
+    else
+        echo "Could not get touchpad status..." && exit 1
+    fi
+
+    echo "$status"
+}
+
+tp_toggle()
+{
+	OLDSTATUS=$( tp_status )
+
+    if [ $OLDSTATUS == "disabled" ]; then
+        action="enable"
+    elif [ $OLDSTATUS == "enabled" ]; then
+        action="disable"
+    else
+        echo "Could not set action for touchpad toggle..." && exit 1
+    fi
+
+    if xinput $action "$device_string"; then
+        NEWSTATUS=$( tp_status )
+    else
+        echo "Unable to toggle touchpad..." && exit 1
+    fi
+
+	echo "Touchpad $NEWSTATUS" | notify
+	notify-send "Touchpad $NEWSTATUS"
+}
+
+case $1 in
+    "status")
+        echo "Touchpad $(tp_status)"
+        ;;
+    "toggle")
+        tp_toggle
+        ;;
+    *)
+        echo "Invalid option: \"$1\""
+        ;;
+esac
+

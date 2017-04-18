@@ -1,0 +1,60 @@
+#!/bin/bash
+
+# An API key is needed to access api.darksky.net
+# 
+# Requires jq in PATH
+
+forecastFile="/tmp/myForecast.json"
+
+testURL="google.com"
+locationbase="ip-api.com"
+darkSkybase="api.darksky.net"
+
+# Find lat and lon from IP address
+ipLocation=$(curl -sS http://${locationbase}/json)
+LAT=$( echo $ipLocation | jq '.lat' )
+LON=$( echo $ipLocation | jq '.lon' )
+
+# Retrieve forcast for location
+# darkSkyKEY must be defined in ~/.config/secrets/
+darkSkyURL="https://${darkSkybase}/forecast/${darkSkyKEY}/${LAT},${LON}"
+
+test_net()
+{
+    URL=$1
+    if ping -c 1 -W 2 $URL >&2; then
+        echo -e "Network and DNS are UP.\nI successfully connected to $URL" >&2
+    else
+        echo -e "Your network connection may be DOWN.\nI could not connect to $URL." >&2
+    fi
+}
+
+get_forecast()
+{
+    echo "darkSkyKEY: $darkSkyKEY"
+    echo "darkSkyURL: $darkSkyURL"
+	for i in {1..60};
+	do
+		if curl -sS $1 > $forecastFile; then
+            msg="Forecast updated at $(date +%r)."
+            echo "$msg" >&2
+            notify-send "$msg"
+            exit 0
+        else
+		    msg="Failed to retrieve forecast. Retrying..."
+		    echo "$msg" >&2
+		    notify-send "$msg"
+		    sleep 10
+        fi
+	done
+}
+
+if test_net $testURL; then
+    if test_net $darkSkybase && test_net $locationbase; then
+        get_forecast $darkSkyURL
+    else
+        exit 1
+    fi
+else
+    exit 1
+fi

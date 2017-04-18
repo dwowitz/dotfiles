@@ -1,0 +1,39 @@
+#!/bin/bash
+
+increment=5
+
+alsaget()
+{
+    ALL="/usr/bin/amixer -c 1 get Master"
+    VOL=$( $ALL | awk 'END {print $(NF-2)}' | tr -d '[]' )
+    TOG=$( $ALL | awk 'END {print $NF}' | tr -d '[]' )
+    echo " $VOL / $TOG"
+}
+
+alsaset()
+{
+    /usr/bin/amixer -c 1 set Master $1
+    /usr/bin/notify-send "`alsaget`"
+}
+
+case $1 in
+    "up")
+        action="${increment}%+"
+        alsaset $action
+        ;;
+    "down")
+        action="${increment}%-"
+        alsaset $action
+        ;;
+    "toggle")
+        action='toggle'
+        alsaset $action
+        ;;
+    "print")
+        echo `alsaget`
+        /usr/bin/notify-send "`alsaget`"
+        ;;
+    *)
+        echo "Invalid option: \"$1\""
+        ;;
+esac

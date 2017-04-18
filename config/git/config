@@ -1,0 +1,5 @@
+[user]
+	email = dwowitz@gmail.com
+	name = Danny Berkowitz
+[core]
+	editor = vim

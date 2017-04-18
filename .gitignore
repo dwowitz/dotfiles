@@ -1,0 +1,51 @@
+# swap
+[._]*.s[a-w][a-z]
+[._]s[a-w][a-z]
+# session
+Session.vim
+# temporary
+.netrwhist
+*~
+# auto-generated tag files
+tags
+
+# annoying web browser dirs
+config/chromium
+config/Min
+config/netsurf
+config/midori
+
+# blahhh
+config/fontforge
+config/dconf
+config/kitty/cached.json
+config/gtk-*
+config/menus
+config/alsi
+config/glyphr-*
+config/mpv
+config/neofetch
+config/plank
+config/configstore
+config/inkscape
+config/htop
+config/yabar
+
+# dwm files i forgot to clean up
+local/src/dwm-6.1/config.h
+local/src/dwm-6.1/drw.o
+local/src/dwm-6.1/dwm
+local/src/dwm-6.1/dwm.o
+local/src/dwm-6.1/util.o
+
+# everything in local/share/ except fonts
+local/share
+!local/share/fonts
+
+# 3rd party libraries
+local/lib/python3.6
+
+# Secrets
+config/secrets
+!config/secrets/secrets.example
+

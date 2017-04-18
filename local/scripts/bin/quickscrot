@@ -1,0 +1,108 @@
+#!/usr/bin/env bash
+#
+# quickscrot.sh
+# Copyright (C) 2017 Danny Berkowitz <dwowitz@gmail.com>
+#
+
+dest="$HOME/screenshots"
+filename="$(date "+%s_%Y-%m-%d").png"
+quality=89
+active=0
+
+# Usage info
+show_help()
+{
+cat << EOF
+
+Usage: ${0##*/} [-a] [-d /path/to/screenshots]...
+
+Capture a screenshot with Scrot.
+Images will be saved in PNG format
+to ~/screenshots.
+
+    -h|--help                        display this help and exit
+    -d|--destination /path/to/shots  default: "~/screenshots"
+    -a|--active                      only capture active window
+                                     default: fullscreen
+    -n|--notify                      notify via notify-send
+    -v|verbose                       verbose mode. Can be used multiple
+                                     times for increased verbosity.
+EOF
+}
+
+opt_required()
+{
+    if [ -z "$2" ]; then
+        echo "Option \"$1\" requires an argument."
+        exit 1
+    else
+        true
+    fi
+}
+
+take_scrot()
+{
+    if $1; then
+        msg="Screenshot saved to \"${dest}/${filename}\""
+    else
+        msg="Screen could not be captured."
+    fi
+
+    if [ "$2" == 1 ]; then
+        echo -e "$msg"
+        notify-send "$msg"
+    else
+        echo -e "$msg"
+    fi
+}
+
+verbose=0
+
+while true; do
+    case $1 in
+        -h|--help)
+            show_help
+            exit 0
+            ;;
+        -v|--verbose)
+            verbose=$((verbose +1))
+            ;;
+        -d|--destination)
+            opt_required $1 $2
+            dest=$2
+            ;;
+        -a|--active)
+            active=1
+            ;;
+        -n|--notify)
+            notify=1
+            ;;
+        --)             # End of options.
+            shift
+            break
+            ;;
+        -?*)
+            echo -e "WARNING: Unknown option (ignored): $1 \n" >&2
+            ;;
+        *)
+            break
+    esac
+
+    shift
+done
+
+scrotbase="scrot ${dest}/${filename} -q $quality"
+scrotfull="$scrotbase"
+scrotactive="$scrotbase -u"
+
+if [ "$active" == 1 ]; then
+    scrotcmd=$scrotactive
+else
+    scrotcmd=$scrotfull
+fi
+
+if [ ! -d $dest ]; then
+    mkdir -p $dest
+fi
+
+take_scrot "$scrotcmd" $notify

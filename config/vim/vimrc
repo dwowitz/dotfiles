@@ -1,0 +1,133 @@
+call plug#begin('~/.vim/plugged')
+
+" Colors
+Plug 'git@gitlab.com:dwowitz/vim-fp02.git'
+Plug 'easysid/mod8.vim'
+Plug 'bcicen/vim-vice'
+Plug 'mbbill/vim-seattle'
+Plug 'jacoborus/tender'
+Plug 'rakr/vim-one'
+Plug 'fneu/breezy'
+Plug 'davidklsn/vim-sialoquent'
+Plug 'tyrannicaltoucan/vim-quantum'
+Plug 'chriskempson/base16-vim'
+
+" Plugins
+Plug 'junegunn/vim-easy-align'
+Plug 'scrooloose/nerdtree'
+Plug 'scrooloose/syntastic'
+Plug 'godlygeek/tabular'
+Plug 'vim-airline/vim-airline'
+Plug 'vim-airline/vim-airline-themes'
+Plug 'tpope/vim-fugitive'
+Plug 'rodjek/vim-puppet'
+Plug 'tpope/vim-sensible'
+Plug 'tpope/vim-surround'
+Plug 'shawncplus/phpcomplete.vim'
+Plug 'MarcWeber/vim-addon-mw-utils'
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+Plug 'ryanoasis/vim-devicons'
+Plug 'aperezdc/vim-template'
+
+call plug#end()
+
+"Make vim use XDG directories
+"https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
+set undodir=$XDG_CACHE_HOME/vim/undo
+set directory=$XDG_CACHE_HOME/vim/swap
+set backupdir=$XDG_CACHE_HOME/vim/backup
+set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
+set runtimepath+=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIMRUNTIME
+
+"Source additional configuration files
+"http://stackoverflow.com/questions/4500748/how-to-source-all-vim-files-in-directory
+for f in split(glob('~/.config/vim/vimrc.d/*.vim'), '\n')
+    exe 'source' f
+endfor
+
+if &term =~ '256color'
+	" make suckless suck less
+    " disable Background Color Erase (BCE) so that color schemes
+    " render properly when inside 256-color tmux and GNU screen.
+    " see also http://sunaku.github.io/vim-256color-bce.html
+    set t_ut=
+endif
+
+syntax on
+filetype plugin indent on
+set encoding=utf8
+"map leader to comma
+let mapleader = ","
+
+"Enable Truecolor/GUI colors
+set termguicolors
+
+"Set Vim-specific sequences for RGB colors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+
+"Set color scheme
+set background=dark
+silent! colorscheme fp02
+
+"Airline settings
+let g:airline_powerline_fonts = 1
+let g:fp02_airline = 1
+let g:airline_theme='fp02'
+
+"Enable omni completion
+set omnifunc=syntaxcomplete#Complete
+
+"CTRL + n to open NERDTree
+map <C-n> :NERDTreeToggle<CR>
+
+"Syntastic options
+"Toggle error panel display
+"http://stackoverflow.com/questions/17512794/ddg#17515778
+function! ToggleErrors()
+    let old_last_winnr = winnr('$')
+    lclose
+    if old_last_winnr == winnr('$')
+        " Nothing was closed, open syntastic error location panel
+        Errors
+    endif
+endfunction
+nnoremap <silent> <C-e> :<C-u>call ToggleErrors()<CR>
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+"Tab/indent options
+set tabstop=4           " number of visual spaces per TAB
+set softtabstop=4       " number of spaces in tab when editing
+set expandtab           " tabs are spaces
+set autoindent          " always set autoindenting on
+set copyindent          " copy the previous indentation on autoindenting
+set shiftwidth=4        " number of spaces to use for autoindenting
+set smarttab            " insert tabs on the start of a line according to shiftwidth, not tabstop
+
+"UI options
+set number              " show line numbers
+filetype indent on      " load filetype-specific indent files
+set wildmenu            " visual autocomplete for command menu
+set showmatch           " highlight matching [{()}]
+set incsearch           " search as characters are entered
+set hlsearch            " highlight matches
+set nowrap              " don't wrap lines
+set ignorecase          " ignore case when searching
+
+"Mappings
+set pastetoggle=<F2>                " F2 toggles paste mode
+nnoremap <F1> :set nonumber!<CR>    " F1 toggles line numbers
+
+"configure template options
+let g:templates_directory = '~/.config/vim/templates'
+let g:email = 'dwowitz@gmail.com'
+let g:username = 'Danny Berkowitz'

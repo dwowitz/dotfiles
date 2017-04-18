@@ -1,0 +1,73 @@
+#!/bin/bash
+
+DIR=$( dirname $0 )
+source "${DIR}/../lib/sh/dwm-colors.sh"
+
+# Set separator icons
+SPR='\uE931'
+SPL='\uE932'
+
+# Basic OS info
+INFO_ICON=""
+OS_HOSTNAME=$( uname -n )
+OS_VERSION=$( uname -r )
+OS_STR="$OS_VERSION"
+
+# Resource usage
+MEM_ICON=""
+MEM_PCT=$( free -m | awk 'NR==2 { used=($2-$7); pct=(used/$2)*100; printf "%2.0f\n", pct}' )
+MEM_STR="$MEM_ICON ${MEM_PCT}%"
+
+# Battery/Charging
+BAT_STATUS=$(cat /sys/class/power_supply/BAT0/status)
+BAT_PCT=$(cat /sys/class/power_supply/BAT0/capacity)
+case "$BAT_STATUS" in
+    "Full")
+        BAT_ICON=""
+        ;;
+    "Charging")
+        BAT_ICON=""
+        ;;
+    "Discharging")
+        if [ $BAT_PCT -ge 75 ]; then
+            BAT_ICON=""
+        elif [ $BAT_PCT -ge 50 ]; then
+            BAT_ICON=""
+        elif [ $BAT_PCT -ge 25 ]; then
+            BAT_ICON=""
+        else
+            BAT_ICON=""
+        fi
+        ;;
+esac
+BAT_STR="$BAT_ICON ${BAT_PCT}%"
+
+# Network
+WIFI_SSID=$(iwconfig wlp1s0 | awk -F: 'NR==1 { print $2 }' | tr -d "\" ")
+WIFI_PCT=$(awk 'NR==3 { print substr($3,1,2) }' /proc/net/wireless)
+WIFI_ICON=""
+WIFI_STR="$WIFI_ICON ${WIFI_PCT}%"
+
+# Sound
+VOL_ALL=$(/usr/bin/amixer -c 1 get Master)
+VOL_PCT=$( echo -e $VOL_ALL | awk 'END {print $(NF-2)}' | tr -d '[]' )
+VOL_TOG=$( echo -e $VOL_ALL | awk 'END {print $NF}' | tr -d '[]' )
+case "$VOL_TOG" in
+    "on")
+        VOL_ICON=""
+        ;;
+    "off")
+        VOL_ICON=""
+        ;;
+esac
+VOL_STR="$VOL_ICON $VOL_PCT"
+
+# Build status line
+STATUS="${lWh_dBk} ${INFO_ICON} ${dBk_col01}${SPR}${dBk_col01} $OS_STR ${col01_dBk}${SPR}${dBk_col03}${SPR}${dBk_col03} ${WIFI_STR}  $VOL_STR  $BAT_STR ${col03_dBk}${SPR} "
+
+echo -e "$STATUS"
+
+
+
+
+
