@@ -63,7 +63,9 @@ esac
 VOL_STR="$VOL_ICON $VOL_PCT"
 
 # Build status line
-STATUS="${lWh_dBk} ${INFO_ICON} ${dBk_col01}${SPR}${dBk_col01} $OS_STR ${col01_dBk}${SPR}${dBk_col03}${SPR}${dBk_col03} ${WIFI_STR}  $VOL_STR  $BAT_STR ${col03_dBk}${SPR} "
+STATUS="${lWh_dBk} ${INFO_ICON} ${dBk_col01}${SPR}${dBk_col01} \
+$OS_STR ${col01_dBk}${SPR}${dBk_col03}${SPR}${dBk_col03} \
+${WIFI_STR}  $VOL_STR  $BAT_STR ${col03_dBk}${SPR} "
 
 echo -e "$STATUS"
 

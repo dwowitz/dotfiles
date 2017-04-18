@@ -48,4 +48,7 @@ esac
 
 WEATHER="${CURRENT_TEMP}°F $icon $CURRENT_SUMMARY"
 
-echo -e "${col03_dBk}${SPL}${dBk_col03} $WEATHER ${col02_col03}${SPL}${dBk_col02} $DATE ${col01_col02}${SPL}${dBk_col01}${SPL}${lWh_dBk} ${OS_ICON} ${dBk_col01}${SPR}${dBk_col01} $TIME ${col01_col02}${SPR}${col02_col03}${SPR}${col03_dBk}${SPR}  "
+echo -e "${col03_dBk}${SPL}${dBk_col03} $WEATHER \
+${dBk_col03}${SPL}${col02_dBk}${SPL}${dBk_col02} $DATE \
+${dBk_col02}${SPL}${col01_dBk}${SPL}${dBk_col01} ${TIME} \
+${dBk_col01}${SPL}${lWh_dBk} ${OS_ICON} "
