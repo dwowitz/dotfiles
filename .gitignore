@@ -30,6 +30,7 @@ config/configstore
 config/inkscape
 config/htop
 config/yabar
+config/gthumb
 
 # dwm files i forgot to clean up
 local/src/dwm-6.1/config.h

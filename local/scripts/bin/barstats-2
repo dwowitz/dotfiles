@@ -8,7 +8,7 @@ SPR='\uE931'
 SPL='\uE932'
 
 # Basic OS info
-INFO_ICON=""
+INFO_ICON="\uF05E"
 OS_HOSTNAME=$( uname -n )
 OS_VERSION=$( uname -r )
 OS_STR="$OS_VERSION"
@@ -45,7 +45,7 @@ BAT_STR="$BAT_ICON ${BAT_PCT}%"
 # Network
 WIFI_SSID=$(iwconfig wlp1s0 | awk -F: 'NR==1 { print $2 }' | tr -d "\" ")
 WIFI_PCT=$(awk 'NR==3 { print substr($3,1,2) }' /proc/net/wireless)
-WIFI_ICON=""
+WIFI_ICON="\uF1EB"
 WIFI_STR="$WIFI_ICON ${WIFI_PCT}%"
 
 # Sound
@@ -54,16 +54,16 @@ VOL_PCT=$( echo -e $VOL_ALL | awk 'END {print $(NF-2)}' | tr -d '[]' )
 VOL_TOG=$( echo -e $VOL_ALL | awk 'END {print $NF}' | tr -d '[]' )
 case "$VOL_TOG" in
     "on")
-        VOL_ICON=""
+        VOL_ICON="\uF0BA"
         ;;
     "off")
-        VOL_ICON=""
+        VOL_ICON="\uF080"
         ;;
 esac
 VOL_STR="$VOL_ICON $VOL_PCT"
 
 # Build status line
-STATUS="${blue03_black03} ${INFO_ICON} ${black03_brown01}${SPR}${black03_brown01} \
+STATUS="${blue02_black03} ${INFO_ICON} ${black03_brown01}${SPR}${black03_brown01} \
 $OS_STR ${brown01_black03}${SPR}${black03_blue03}${SPR}${black03_blue03} \
 ${WIFI_STR} ${black03_blue03} ${black03_blue03}$VOL_STR ${black03_blue03} ${black03_blue03}$BAT_STR ${blue03_black03}${SPR}"
 

@@ -25,6 +25,7 @@ export XDG_DATA_HOME=$HOME/.local/share
 # Change default vimrc location
 export VIMINIT="so $XDG_CONFIG_HOME/vim/vimrc"
 
-#if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-#    exec startx
-#fi
+# Start X at login
+if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+    exec startx
+fi

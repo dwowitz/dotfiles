@@ -37,7 +37,7 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
 fi
 
 # Start Compton to enable window transparency
-compton -b --config ~/.config/compton/compton.conf
+# compton -b --config ~/.config/compton/compton.conf
 
 #Display script output in status bar
 while true; do
@@ -77,5 +77,5 @@ tabbed -f -r 2 -n homest st -w '' &
 # https://wiki.archlinux.org/index.php/dwm#Restart_dwm_without_logging_out_or_closing_programs
 while true; do
     # Log stderror & stdout to a file 
-    dwm >> ~/.log/dwm.log 2>&1
+    /usr/bin/dwm >> ~/.log/dwm.log 2>&1
 done

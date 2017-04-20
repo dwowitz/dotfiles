@@ -79,7 +79,7 @@ alias ll='ls -la'
 alias locate='sudo updatedb && locate'
 
 # The colors Duke, the colors!
-# Apply colors to linux console
+# Apply colors defined in ~/.Xresources to linux console
 if [ "$TERM" = "linux" ]; then
     ORIGIFS=$IFS
     IFS=$'\n'
