@@ -31,6 +31,7 @@ fg_W="\[${ESC}[37m\]"
 # Set prompt
 
 ## Display status of last executed command.
+# Do not use unicode glyphs for linux console
 console_last_status()
 {
     case "$?" in
@@ -45,7 +46,7 @@ console_last_status()
             ;;
     esac
 }
-
+# Use unicode glyphs in terminal emulator
 emu_last_status()
 {
     case "$?" in
@@ -77,6 +78,13 @@ alias mkdir='mkdir -p'
 alias vi='vim'
 alias ll='ls -la'
 alias locate='sudo updatedb && locate'
+# Suckless aliases for packages installed using my PKGBUILDs
+SLS="dwm st"
+for sl in $SLS
+do
+    alias $sl="${sl}_${USER}"
+done
+
 
 # The colors Duke, the colors!
 # Apply colors defined in ~/.Xresources to linux console
