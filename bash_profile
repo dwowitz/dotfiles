@@ -17,6 +17,8 @@ done
 export visual=vim
 export EDITOR=vim
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts/bin
+# Increase bash_history size
+HISTFILESIZE=5000
 # XDG variables
 export XDG_CONFIG_HOME=$HOME/.config
 export XDG_CACHE_HOME=$HOME/.cache
