@@ -9,6 +9,9 @@ Session.vim
 # auto-generated tag files
 tags
 
+# Tempory backup files
+**/*.bak
+
 # annoying web browser dirs
 config/chromium
 config/Min
@@ -31,13 +34,6 @@ config/inkscape
 config/htop
 config/yabar
 config/gthumb
-
-# dwm files i forgot to clean up
-local/src/dwm-6.1/config.h
-local/src/dwm-6.1/drw.o
-local/src/dwm-6.1/dwm
-local/src/dwm-6.1/dwm.o
-local/src/dwm-6.1/util.o
 
 # everything in local/share/ except fonts
 local/share
