@@ -68,7 +68,7 @@ myForecast > /tmp/myForecast.json &
 redshift -c ~/.config/redshift/redshift.conf &
 
 #Start terminal emulator within tabbed
-tabbed -f -r 2 -n homest st -w '' &
+tabbed -f -r 2 -n homest st_${USER} -w '' &
 
 #Start Surf in tabbed window
 #tabbed -n homesurf -f surf -e &
@@ -77,5 +77,5 @@ tabbed -f -r 2 -n homest st -w '' &
 # https://wiki.archlinux.org/index.php/dwm#Restart_dwm_without_logging_out_or_closing_programs
 while true; do
     # Log stderror & stdout to a file 
-    /usr/bin/dwm >> ~/.log/dwm.log 2>&1
+    /usr/bin/dwm_${USER} >> ~/.log/dwm.log 2>&1
 done
