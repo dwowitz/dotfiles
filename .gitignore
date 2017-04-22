@@ -27,7 +27,6 @@ config/menus
 config/alsi
 config/glyphr-*
 config/mpv
-config/neofetch
 config/plank
 config/configstore
 config/inkscape
