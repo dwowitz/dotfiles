@@ -35,13 +35,13 @@ config/yabar
 config/gthumb
 
 # everything in local/share/ except fonts
-local/share
+local/share/*
 !local/share/fonts
 
 # 3rd party libraries
 local/lib/python3.6
 
 # Secrets
-config/secrets
+config/secrets/*
 !config/secrets/secrets.example
 
