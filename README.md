@@ -1,4 +1,4 @@
-![](https://github.com/dwowitz/dotfiles/blob/master/dotlogo.svg)
+![dotlogo](docs/dotlogo.png)
 
 ## WIP
 
