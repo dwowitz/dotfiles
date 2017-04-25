@@ -1,3 +1,7 @@
+# ![dotlogo](dotlogo.svg)
+
+## WIP
+
 To Install dotfiles:
 ```shell
 git clone https://github.com/dwowitz/dotfiles.git ~/dotfiles; \
