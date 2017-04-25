@@ -1,4 +1,4 @@
-![](./dotlogo.svg)
+![](https://github.com/dwowitz/dotfiles/blob/master/dotlogo.svg)
 
 ## WIP
 
