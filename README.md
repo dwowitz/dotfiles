@@ -1,4 +1,4 @@
-# ![dotlogo](dotlogo.svg)
+![](./dotlogo.svg)
 
 ## WIP
 
