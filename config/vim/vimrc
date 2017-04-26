@@ -34,11 +34,11 @@ call plug#end()
 
 "Make vim use XDG directories
 "https://wiki.archlinux.org/index.php/XDG_Base_Directory_support
-set undodir=$XDG_CACHE_HOME/vim/undo
-set directory=$XDG_CACHE_HOME/vim/swap
-set backupdir=$XDG_CACHE_HOME/vim/backup
-set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
-set runtimepath+=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIMRUNTIME
+"set undodir=$XDG_CACHE_HOME/vim/undo
+"set directory=$XDG_CACHE_HOME/vim/swap
+"set backupdir=$XDG_CACHE_HOME/vim/backup
+"set viminfo+='1000,n$XDG_CACHE_HOME/vim/viminfo
+"set runtimepath+=$XDG_CONFIG_HOME/vim,$XDG_CONFIG_HOME/vim/after,$VIMRUNTIME
 
 "Source additional configuration files
 "http://stackoverflow.com/questions/4500748/how-to-source-all-vim-files-in-directory
