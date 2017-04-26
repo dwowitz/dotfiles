@@ -1,6 +1,6 @@
 # List of files to be ignored by dotfiles installation script
+installer
 docs
 gitconfig
 README.md
 crontab.bak
-dotfiles.sh

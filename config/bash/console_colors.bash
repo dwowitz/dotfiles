@@ -11,7 +11,7 @@
 if [ "$TERM" = "linux" ]; then
     ORIGIFS=$IFS
     IFS=$'\n'
-    for i in $(grep "\*\.color" ~/.Xresources)
+    for i in $(grep "\*\.color" $XDG_CONFIG_HOME/X11/Xresources)
     do
         Cnumd=$( echo $i | awk -F: '{ print $1 }' | tr -d '*.color' )
         Cnumh=$( echo "obase=16; $Cnumd" | bc )
