@@ -6,9 +6,9 @@
 # Distributed under terms of the MIT license.
 #
 
+dir=$(cd -P $(dirname $BASH_SOURCE[0]) && pwd)
 
-
-. dynoptparse.sh
+. $dir/../lib/sh/dynoptparse.sh
 options+=(["my_option:R"]="I just added a required option.")
 my_option()
 {
