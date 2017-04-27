@@ -1,3 +1,9 @@
+# Update forcast
 0 * * * * . ~/.bash_profile; ~/.local/scripts/bin/myForecast
+# Backup Crontab
 0 * * * * /usr/bin/crontab -l > ~/dotfiles/crontab.bak
+# Backup Home
 0 0 * * * . ~/.bash_profile; ~/.local/scripts/bin/rclone_backup.sh && curl -fsS --retry 3 https://hchk.io/${HCID_HOMEBKUP} > /dev/null
+# Censor real secrets and output example file.
+# http://stackoverflow.com/questions/30637112/sed-replace-content-within-double-quotes
+0 * * * * sed '/export .*=/ s/="[^"][^"]*"/="<SECRET_GOES_HERE>"/' ~/.config/secrets/secrets > ~/.config/secrets/secrets.example
