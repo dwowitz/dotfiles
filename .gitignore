@@ -19,6 +19,7 @@ config/netsurf
 config/midori
 
 # blahhh
+config/rclone
 config/fontforge
 config/dconf
 config/kitty/cached.json
