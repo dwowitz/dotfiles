@@ -14,6 +14,7 @@ options+=(["install"]="Install dotfiles to ${HOME}.")
 options+=(["update"]=" Pull latest files from git.")
 options+=(["backup"]=" Restore dotfiles from backup.")
 options+=(["restore"]="Restore dotfiles from backup. (WIP)")
+options+=(["depchk"]="Check for missing dependencies. (WIP)")
 
 
 # Files in $scriptdir excluding $dotignored
@@ -68,6 +69,11 @@ update()
         echo "Dotfiles could not be updated. I'm sorry :-("
         exit 1
     fi
+}
+
+depchk()
+{
+    echo "HELP! somebody needs to write me!"
 }
 
 parse_opts $@
