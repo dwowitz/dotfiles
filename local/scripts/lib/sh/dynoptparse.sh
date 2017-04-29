@@ -53,7 +53,7 @@ declare -A options=(
 help()
 {
     IFS="$ORIGIFS"
-    echo -e "\nUsage: ${0##*/} [--option ARGUMENT] [-o ARGUMENT]..."
+    echo -e "\nUsage: ${0##*/} [--option ARGUMENT] [-o ARGUMENT]...\n"
     for opt in ${!options[@]}; do
         IFS=$':'
         read -r o required <<< "$opt"
@@ -64,6 +64,7 @@ help()
         fi
         IFS="$ORIGIFS"
     done
+    echo -e "\n"
     exit 0
 }
 

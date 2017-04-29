@@ -10,6 +10,9 @@ dotignored=`cat ${scriptdir}/../.dotignore | egrep -v "^#"`
 deps=$(grep -v "^#" ${scriptdir}/dependencies.txt) # Read dependencies into variable.
 ##########
 
+# Source dotfiles ASCII banner.
+. ${scriptdir}/dotbanner.sh
+
 # Source option parser and add options.
 . ${scriptdir}/../local/scripts/lib/sh/dynoptparse.sh
 options+=(["install"]="Install dotfiles to ${HOME}.")
@@ -43,6 +46,7 @@ restore()
 
 install()
 {
+    depchk
     backup
     # symlink dotfiles to $HOME
     for file in $dotfiles; do
@@ -90,5 +94,21 @@ depchk()
     fi
 }
 
-. ${scriptdir}/dotfiles-ascii.sh
-parse_opts $@
+clear
+
+dotbanner
+
+if [ -n $@ ]; then
+    parse_opts --help
+else
+    parse_opts $@
+fi
+
+
+
+
+
+
+
+
+
