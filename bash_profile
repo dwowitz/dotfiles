@@ -7,9 +7,9 @@ fi
 
 # Source secrets files
 SECRETS_DIR="${HOME}/.config/secrets"
-for file in $(ls $SECRETS_DIR); do
-    if [ -f $SECRETS_DIR/$file ]; then
-        . $SECRETS_DIR/$file
+for file in $(find $SECRETS_DIR -name "*.shhh"); do
+    if [ -f ${file} ]; then
+        . ${file}
     fi
 done
 
