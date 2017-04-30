@@ -6,7 +6,7 @@
 # Distributed under terms of the MIT license.
 #
 # Description:
-# Apply terminal colors defines in $HOME/.Xresources to the linyx console.
+# Apply terminal colors defined in $HOME/.Xresources to the linux console.
 
 if [ "$TERM" = "linux" ]; then
     ORIGIFS=$IFS
