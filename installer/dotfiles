@@ -1,20 +1,20 @@
 #!/usr/bin/env bash
 
 ### Variables ###
-scriptdir=$(cd -P $(dirname $BASH_SOURCE[0]) && pwd) # path to this directory.
-today=`date +"%m-%d-%Y_%s"`     # date mm-dd-yyyy
-dir="$HOME/dotfiles"            # dotfiles directory
-olddir="$HOME/dotfiles.$today"  # old dotfiles backup directory
-files=$(ls ${scriptdir}/../)    # list of files/folders to symlink
-dotignored=`cat ${scriptdir}/../.dotignore | egrep -v "^#"`
-deps=$(grep -v "^#" ${scriptdir}/dependencies.txt) # Read dependencies into variable.
+scriptdir=$(cd -P $(dirname $BASH_SOURCE[0]) && pwd)  # path to this directory.
+today=`date +"%m-%d-%Y_%s"`                           # date mm-dd-yyyy
+dotdir="$scriptdir/../files"                          # dotfiles directory
+olddir="$HOME/dotbackup/dotfiles.$today"              # old dotfiles backup directory
+files=$(ls ${dotdir})                                 # list of files/folders to symlink
+dotignored=`cat ${dotdir}/.dotignore | egrep -v "^#"`
+deps=$(grep -v "^#" ${scriptdir}/dependencies.txt)    # Read dependencies into variable.
 ##########
 
 # Source dotfiles ASCII banner.
 . ${scriptdir}/dotbanner.sh
 
 # Source option parser and add options.
-. ${scriptdir}/../local/scripts/lib/sh/dynoptparse.sh
+. ${scriptdir}/../files/local/scripts/lib/sh/dynoptparse.sh
 options+=(["install"]="Install dotfiles to ${HOME}.")
 options+=(["update"]=" Pull latest files from git.")
 options+=(["backup"]=" Restore dotfiles from backup.")
@@ -34,7 +34,8 @@ backup()
             echo "Moving \".$file\" from \"$HOME\" to \"$olddir\""
             mkdir -p $olddir && mv $HOME/.$file $olddir/.$file
         else
-            echo "Nothing to back up."
+            true
+            #echo "\".${file} not found."
         fi
     done
 }
@@ -51,8 +52,11 @@ install()
     # symlink dotfiles to $HOME
     for file in $dotfiles; do
         echo "Creating symlink \"${HOME}/.${file}\"."
-        ln -sf $scriptdir/$file $HOME/.$file
+        ln -sf ${dotdir}/${file} ${HOME}/.${file}
     done
+
+    # Source profile for environment variables before trying to run vim.
+    . ${HOME}/.bash_profile
 
     # install vim plugins
     if [ ! ~/.vim/autoload/plug.vim ]; then
@@ -69,7 +73,7 @@ install()
 
 update()
 {
-    if cd ${scriptdir}../ && git pull; then
+    if cd ${scriptdir}/../ && git pull; then
         install
     else
         echo "Dotfiles could not be updated. I'm sorry :-("
@@ -79,6 +83,7 @@ update()
 
 depchk()
 {
+    depsfailed=0
     for d in $deps; do
         if which $d &> /dev/null; then
             echo "Found $d in \$PATH."
@@ -88,9 +93,13 @@ depchk()
         fi
     done
 
-    if [ $depsfailed -ge 1 ]; then
+    if [ "$depsfailed" -eq 0 ]; then
+        echo "Hooray! You have all necessary dependencies."
+    elif [ "$depsfailed" -ge 1 ]; then
         #echo "You have $depsfailed missing dependencies. Go fix it!!!"
         exit 1
+    else
+        exit 2
     fi
 }
 
@@ -98,7 +107,7 @@ clear
 
 dotbanner
 
-if [ -n $@ ]; then
+if [ ! -n $@ ]; then
     parse_opts --help
 else
     parse_opts $@

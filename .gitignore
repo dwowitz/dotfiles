@@ -13,36 +13,36 @@ tags
 **/*.bak
 
 # annoying web browser dirs
-config/chromium
-config/Min
-config/netsurf
-config/midori
+files/config/chromium
+files/config/Min
+files/config/netsurf
+files/config/midori
 
 # blahhh
-config/rclone
-config/fontforge
-config/dconf
-config/kitty/cached.json
-config/gtk-*
-config/menus
-config/alsi
-config/glyphr-*
-config/mpv
-config/plank
-config/configstore
-config/inkscape
-config/htop
-config/yabar
-config/gthumb
+files/config/rclone
+files/config/fontforge
+files/config/dconf
+files/config/kitty/cached.json
+files/config/gtk-*
+files/config/menus
+files/config/alsi
+files/config/glyphr-*
+files/config/mpv
+files/config/plank
+files/config/configstore
+files/config/inkscape
+files/config/htop
+files/config/yabar
+files/config/gthumb
 
 # everything in local/share/ except fonts
-local/share/*
-!local/share/fonts
+files/local/share/*
+!files/local/share/fonts
 
 # 3rd party libraries
-local/lib/python3.6
+files/local/lib/python3.6
 
 # Secrets
-config/secrets/*
-!config/secrets/secrets.example
+files/config/secrets/*
+!files/config/secrets/secrets.example
 
