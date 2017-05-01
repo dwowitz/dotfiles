@@ -2,14 +2,14 @@
 
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
-	. ~/.bashrc
+	. ~/.bashrc && echo "~/.bashrc has been sourced." >> ${HOME}/.log/bash_profile.log
 fi
 
 # Source secrets files
 SECRETS_DIR="${HOME}/.config/secrets"
 for file in $(find $SECRETS_DIR -name "*.shhh"); do
     if [ -f ${file} ]; then
-        . ${file}
+        . ${file} && echo "\"${file} has been sourced." >> ${HOME}/.log/bash_profile.log
     fi
 done
 
@@ -28,6 +28,6 @@ export XDG_DATA_HOME=$HOME/.local/share
 export VIMINIT="so $XDG_CONFIG_HOME/vim/vimrc"
 
 # Start X at login
-if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
-    exec startx
-fi
+#if [ -z "$DISPLAY" ] && [ -n "$XDG_VTNR" ] && [ "$XDG_VTNR" -eq 1 ]; then
+#    exec startx
+#fi

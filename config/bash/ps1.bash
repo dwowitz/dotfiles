@@ -1,4 +1,4 @@
-#! /bin/bash
+#!/usr/bin/echo "Source me for a good time." .
 #
 # ps1.bash
 # Copyright (C) 2017 Danny Berkowitz <dwowitz@gmail.com>
