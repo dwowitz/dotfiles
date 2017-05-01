@@ -1,5 +1,5 @@
-# Under Construction.
-# ~/.files
+# Under Construction
+# **~/.files**
 > My dotfiles + installer
 
 <p align="center">
