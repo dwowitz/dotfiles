@@ -1,4 +1,4 @@
-![dotshot](docs/dotshot.png)
+![dotshot](docs/dotshot.png|width=300)
 
 ## WIP
 
