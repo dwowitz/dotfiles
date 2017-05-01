@@ -1,4 +1,4 @@
-![dotshot](docs/dotshot.png|width=300)
+<img src="https://raw.githubusercontent.com/dwowitz/dotfiles/master/docs/dotshot.png" width="300">
 
 ## WIP
 
