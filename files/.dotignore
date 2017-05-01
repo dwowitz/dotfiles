@@ -1,7 +1,2 @@
 # List of files to be ignored by dotfiles installation script
-installer
-docs
-gitconfig
-README.md
-LICENSE
 crontab.bak
