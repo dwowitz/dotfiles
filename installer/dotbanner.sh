@@ -1,4 +1,10 @@
 #!/usr/bin/env bash
+#
+# dotbanner.sh
+# Copyright (C) 2017 Danny Berkowitz <dwowitz@gmail.com>
+#
+# Distributed under terms of the MIT license.
+#
 
 dotbanner()
 {
