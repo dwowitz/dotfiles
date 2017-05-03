@@ -1,7 +1,7 @@
 # Update forcast
 0 * * * * . ~/.bash_profile; ~/.local/scripts/bin/myForecast
 # Backup Crontab
-0 * * * * /usr/bin/crontab -l > ~/dotfiles/crontab.bak
+0 * * * * /usr/bin/crontab -l > ~/dotfiles/files/crontab.bak
 # Backup Home
 0 0 * * * . ~/.bash_profile; ~/.local/scripts/bin/rclone_backup.sh && curl -fsS --retry 3 https://hchk.io/${HCID_HOMEBKUP} > /dev/null
 # Censor real secrets and output example file.
