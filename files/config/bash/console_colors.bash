@@ -8,7 +8,7 @@
 # Description:
 # Apply terminal colors defined in $HOME/.Xresources to the linux console.
 
-if [ "$TERM" = "linux" ]; then
+if [ "$TERM" == "linux" ]; then
     ORIGIFS=$IFS
     IFS=$'\n'
     for i in $(grep "\*\.color" $XDG_CONFIG_HOME/X11/Xresources)

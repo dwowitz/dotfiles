@@ -1,5 +1,10 @@
 # .bash_profile
 
+# Set XDG variables first
+export XDG_CONFIG_HOME=${HOME}/.config
+export XDG_CACHE_HOME=${HOME}/.cache
+export XDG_DATA_HOME=${HOME}/.local/share
+
 # Get the aliases and functions
 if [ -f ~/.bashrc ]; then
 	. ~/.bashrc && echo "~/.bashrc has been sourced." >> ${HOME}/.log/bash_profile.log
@@ -17,12 +22,10 @@ done
 export visual=vim
 export EDITOR=vim
 export PATH=$PATH:$HOME/bin:$HOME/.local/bin:$HOME/.local/scripts/bin
-# Increase bash_history size
-HISTFILESIZE=5000
 # XDG variables
-export XDG_CONFIG_HOME=$HOME/.config
-export XDG_CACHE_HOME=$HOME/.cache
-export XDG_DATA_HOME=$HOME/.local/share
+#export XDG_CONFIG_HOME=$HOME/.config
+#export XDG_CACHE_HOME=$HOME/.cache
+#export XDG_DATA_HOME=$HOME/.local/share
 
 # Change default vimrc location
 export VIMINIT="so $XDG_CONFIG_HOME/vim/vimrc"

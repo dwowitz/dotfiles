@@ -36,6 +36,11 @@ if [ -d /etc/X11/xinit/xinitrc.d ] ; then
  unset f
 fi
 
+# Configure touchpad
+tpad=$(xinput list | grep -i "touchpad" | grep -Po "(?<=id\=).*?(?=\[)")
+xinput set-prop $tpad 'libinput Tapping Enabled' 1
+xinput set-prop $tpad 'libinput Natural Scrolling Enabled' 1
+
 # Start Compton to enable window transparency
 # compton -b --config ~/.config/compton/compton.conf
 

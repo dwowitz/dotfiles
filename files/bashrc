@@ -29,3 +29,6 @@ export LS_OPTIONS='--color=auto'
 eval "`dircolors`"
 alias ls='ls $LS_OPTIONS'
 
+# Set bash history size
+HISTSIZE=5000
+HISTFILESIZE=5000
