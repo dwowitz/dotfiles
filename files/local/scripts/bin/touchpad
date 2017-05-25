@@ -6,13 +6,12 @@
 # Distributed under terms of the MIT license.
 #
 
-device_name="Microsoft Surface Type Cover"
-device_type="pointer"
-device_string="${device_type}:${device_name}"
+tpadid=$(xinput list | grep -i "touchpad" | grep -Po "(?<=id\=).*?(?=\[)")
 
 tp_status()
 {
-    device_enabled=$(xinput list-props "${device_string}" | awk -F: '/Device Enabled/ {gsub(/[\t]/, "", $2); print $2 }')
+    device_enabled=$(xinput list-props $tpadid |\
+        awk -F: '/Device Enabled/ {gsub(/[\t]/, "", $2); print $2 }')
 
     if [ $device_enabled == 1 ]; then
         status="enabled"
@@ -37,7 +36,7 @@ tp_toggle()
         echo "Could not set action for touchpad toggle..." && exit 1
     fi
 
-    if xinput $action "$device_string"; then
+    if xinput $action $tpadid; then
         NEWSTATUS=$( tp_status )
     else
         echo "Unable to toggle touchpad..." && exit 1
