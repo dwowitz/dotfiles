@@ -43,8 +43,8 @@ emu_last_status()
 TERMTITLE='printf "\033]0;%s@%s:%s\007" "${USER}" "${HOSTNAME%%.*}" "${PWD/#$HOME/\~}"'
 
 if [ "$TERM" = "linux" ]; then
-    PROMPT_COMMAND="history -a; console_last_status; $TERMTITLE"
+    PROMPT_COMMAND="console_last_status; history -a; $TERMTITLE"
 else
-    PROMPT_COMMAND="history -a; emu_last_status; $TERMTITLE"
+    PROMPT_COMMAND="emu_last_status; history -a; $TERMTITLE"
 fi
 
