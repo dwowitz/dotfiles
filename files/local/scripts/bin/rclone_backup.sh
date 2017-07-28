@@ -22,5 +22,9 @@ bname=$(basename "$0")
 sname=${bname%.*}
 logname=$sname-$(date +"%m%d%Y").log
 
-rclone --exclude-from $EXCLUDE_FILE $RC_CMD -L $SRC_DIR ${BKUP_ACCT}:${DEST_DIR} \
->> ${LOG_DIR}/${logname} 2>&1
+#rclone \
+#--exclude-from $EXCLUDE_FILE \
+#$RC_CMD -L $SRC_DIR ${BKUP_ACCT}:${DEST_DIR} \
+#>> ${LOG_DIR}/${logname} 2>&1
+
+echo "I'm Broken... Fix Me!!!"
